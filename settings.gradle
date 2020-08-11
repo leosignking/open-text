@@ -1,0 +1,4 @@
+rootProject.name = 'open-text'
+include 'producer'
+include 'consumer'
+
