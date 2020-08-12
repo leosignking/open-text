@@ -5,18 +5,14 @@ pipeline {
             steps {
                 echo 'Compile and Build the project'
                  withGradle() {
-                    sh './gradlew -v'
+                    sh './gradlew assemble'
                  }
             }
         }
         stage('Publish') {
             steps {
-                echo 'Build the image'
-                sh './gradlew docker'
-            }
-            steps {
-                echo 'Push the image to docker hub'
-                sh './gradlew dockerPush'
+                echo 'Build the image and publish to docker hub'
+                sh './gradlew docker dockerPush'
             }
         }
         stage('Deploy') {
