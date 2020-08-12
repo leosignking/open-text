@@ -1,6 +1,6 @@
 plugins {
-    id 'com.plantir.docker' version '0.25.0'
-    id 'com.plantir.docker-run' version '0.25.0'
+    id 'com.palantir.docker' version '0.25.0'
+    id 'com.palantir.docker-run' version '0.25.0'
     id 'java'
     id 'org.springframework.boot' version '2.3.1.RELEASE'
 }
