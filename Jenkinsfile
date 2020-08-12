@@ -11,7 +11,12 @@ pipeline {
         }
         stage('Publish') {
             steps {
-                echo 'Publish the image to docker hub'
+                echo 'Build the image'
+                sh './gradlew docker'
+            }
+            steps {
+                echo 'Push the image to docker hub'
+                sh './gradlew dockerPush'
             }
         }
         stage('Deploy') {
