@@ -1,6 +1,8 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'com.plantir.docker' version '0.25.0'
+    id 'com.plantir.docker-run' version '0.25.0'
     id 'java'
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -32,6 +34,22 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation 'junit:junit:4.12'
+}
+
+String dockerHubUsernameProperty = findProperty('dockerHubUsername') ?: 'rsridharreddy'
+String imageName = "${dockerHubUsernameProperty}/open-text-producer:$version"
+
+docker {
+    name imageName
+    files "build/libs/${bootJar.archiveFileName.get()}"
+    buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
+dockerRun {
+    name project.name
+    image imageName
+    ports '8080:8080'
+    clean true
 }
 
 task wrapper(type: Wrapper) {
