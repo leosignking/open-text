@@ -33,3 +33,7 @@ dependencies {
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation 'junit:junit:4.12'
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '6.6'
+}
