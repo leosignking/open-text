@@ -4,7 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Compile and Build the project'
-                 sh 'gradle build'
+                 withGradle() {
+                    sh 'gradle -v'
+                 }
             }
         }
         stage('Publish') {
