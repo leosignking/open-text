@@ -1,34 +1,20 @@
 pipeline {
     agent any 
     stages {
-        stage('Static Analysis') {
+        stage('Build') {
             steps {
-                echo 'Run the static analysis to the code' 
+                echo 'Compile and Build the project'
+                 sh 'gradle build'
             }
         }
-        stage('Compile') {
+        stage('Publish') {
             steps {
-                echo 'Compile the source code' 
+                echo 'Publish the image to docker hub'
             }
         }
-        stage('Security Check') {
+        stage('Deploy') {
             steps {
-                echo 'Run the security check against the application' 
-            }
-        }
-        stage('Run Unit Tests') {
-            steps {
-                echo 'Run unit tests from the source code' 
-            }
-        }
-        stage('Run Integration Tests') {
-            steps {
-                echo 'Run only crucial integration tests from the source code' 
-            }
-        }
-        stage('Publish Artifacts') {
-            steps {
-                echo 'Save the assemblies generated from the compilation' 
+                echo 'Deploy the application to kubernetes'
             }
         }
     }
